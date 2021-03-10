@@ -1,5 +1,4 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { LogsProps } from "../reducers/dataReducer";
 
 enum FetchDataActionTypes {
   FetchData = "FETCH_DATA",

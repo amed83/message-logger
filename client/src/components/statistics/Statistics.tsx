@@ -3,13 +3,15 @@ import { FC, memo } from "react";
 import { Containertyles } from "./styles";
 import { Typography } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
-interface StatsProps {
-  warning: number;
-  info: number;
-  error: number;
+import { caluclateStatistics } from "../../utils/calculateStatistics";
+import { LogsProps } from "../../models/models";
+
+interface DataProps {
+  data: LogsProps[];
 }
 
-export const Statistics: FC<StatsProps> = memo(({ warning, info, error }) => {
+export const Statistics: FC<DataProps> = memo(({ data }) => {
+  const { warning, info, error } = caluclateStatistics(data);
   const classes = Containertyles();
   return (
     <Container className={classes.root}>

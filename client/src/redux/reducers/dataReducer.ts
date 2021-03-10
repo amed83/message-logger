@@ -1,12 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { LogsProps } from "../../models/models";
 import { fetchDataAction } from "../actions/fetchData";
-
-export interface LogsProps {
-  date: string;
-  severity: string;
-  message: string;
-  id: number;
-}
 
 export interface LogsState {
   logs: {

@@ -7,6 +7,7 @@ import { getLogs, getFetchStatus } from "../../redux/selectors/logsSelectors";
 import { LogItem } from "../LogItem/LogItem";
 import { Statistics } from "../Statistics/Statistics";
 import "./styles.css";
+import { caluclateStatistics } from "../../utils/calculateStatistics";
 
 export const Dashboard = () => {
   const dispatch = useDispatch();
@@ -17,23 +18,9 @@ export const Dashboard = () => {
   const [pageIndex, setPageIndex] = useState<number>(1);
   const [noMoraDataMessage, setNoMoreDataMessage] = useState<boolean>(false);
 
-  interface StatsProps {
-    warning: number;
-    info: number;
-    error: number;
-  }
-
-  const caluclateStatistics = (): StatsProps => {
-    return logs.data.reduce((prev, next) => {
-      prev[next.severity] = ++prev[next.severity] || 1;
-      return prev;
-    }, {} as StatsProps);
-  };
-
   useEffect(() => {
     if (fetchStatus === "fulfilled") {
       setLoading(false);
-      caluclateStatistics();
     }
     if (fetchStatus === "fulfilled" && !logs.hasNextPage) {
       setNoMoreDataMessage(true);
@@ -56,6 +43,7 @@ export const Dashboard = () => {
   if (fetchStatus === "rejected") {
     return <div>ERROR</div>;
   }
+  // console.log(" logs on dashboard ", logs);
   return (
     <div>
       <div className="MainContainer">
@@ -75,7 +63,7 @@ export const Dashboard = () => {
             ? "...LOADING"
             : " "}
         </div>
-        {logs.data.length > 1 && <Statistics {...caluclateStatistics()} />}
+        {logs.data.length > 1 && <Statistics data={logs.data} />}
       </div>
     </div>
   );
