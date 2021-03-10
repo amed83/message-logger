@@ -43,7 +43,6 @@ export const Dashboard = () => {
   if (fetchStatus === "rejected") {
     return <div>ERROR</div>;
   }
-  // console.log(" logs on dashboard ", logs);
   return (
     <div>
       <div className="MainContainer">

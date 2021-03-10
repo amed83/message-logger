@@ -27,9 +27,7 @@ app.get("/api/users", (req: Request, res: Response) => {
   const start = page * payloadlenght - payloadlenght;
   const end = page * payloadlenght;
   const logsPayload = logs.slice(start, end);
-  setTimeout(() => {
-    res
-      .status(200)
-      .json({ hasNextPage: logsPayload.length > 1, logs: logsPayload });
-  }, 300);
+  res
+    .status(200)
+    .json({ hasNextPage: logsPayload.length > 1, logs: logsPayload });
 });
