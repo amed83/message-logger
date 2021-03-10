@@ -36,14 +36,3 @@
     transform: rotate(360deg);
   }
 }
-
-.Items {
-  margin: 20px;
-}
-
-.Container {
-  list-style: none;
-  font-size: 16px;
-  margin: 0px;
-  padding: 6px;
-}

@@ -1,12 +1,14 @@
-import React, { FC, memo } from "react";
+import { FC, memo } from "react";
 import { LogsProps } from "../../redux/reducers/dataReducer";
 
 import Container from "@material-ui/core/Container";
+import { Containertyles } from "./styles";
 
 export const LogItem: FC<Partial<LogsProps>> = memo(
   ({ date, severity, message }) => {
+    const classes = Containertyles();
     return (
-      <Container>
+      <Container className={classes.root}>
         <p>
           <strong>Date:</strong> {date}
         </p>

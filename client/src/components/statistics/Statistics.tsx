@@ -1,24 +1,29 @@
-import React, { FC, memo } from "react";
-
+import { Container } from "@material-ui/core";
+import { FC, memo } from "react";
+import { Containertyles } from "./styles";
+import { Typography } from "@material-ui/core";
+import Box from "@material-ui/core/Box";
 interface StatsProps {
   warning: number;
   info: number;
   error: number;
 }
 
-const divStyle = {
-  width: "200px",
-  height: "300px",
-  border: "solid black 1px",
-  position: "fixed",
-} as React.CSSProperties;
-
 export const Statistics: FC<StatsProps> = memo(({ warning, info, error }) => {
+  const classes = Containertyles();
   return (
-    <div style={divStyle}>
-      <p>Warnings: {warning}</p>
-      <p>Info :{info}</p>
-      <p>Error :{error}</p>
-    </div>
+    <Container className={classes.root}>
+      <Typography component="div">
+        <Box fontWeight="fontWeightBold" m={1}>
+          Warnings: {warning}
+        </Box>
+        <Box fontWeight="fontWeightBold" m={1}>
+          Info: {info}
+        </Box>
+        <Box fontWeight="fontWeightBold" m={1}>
+          Error: {error}
+        </Box>
+      </Typography>
+    </Container>
   );
 });

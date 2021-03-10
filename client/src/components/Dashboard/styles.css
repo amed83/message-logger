@@ -1,0 +1,16 @@
+.ListContainer {
+  max-height: 50vh;
+  overflow: auto;
+  margin-bottom: 20px;
+}
+.MainContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.Loading {
+  height: 10px;
+  margin-bottom: 10px;
+}
