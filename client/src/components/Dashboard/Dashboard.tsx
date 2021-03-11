@@ -34,7 +34,7 @@ export const Dashboard = () => {
       setNoMoreDataMessage(true);
       setHasNextPage(false);
     }
-  }, [fetchStatus]);
+  }, [fetchStatus, logs.hasNextPage]);
 
   const handleLoadMore = () => {
     dispatch(fetchDataAction(pageIndex));
