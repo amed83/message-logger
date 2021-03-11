@@ -2,8 +2,8 @@ const casual = require("casual");
 
 const messages = {
   info: "Some Info Message",
-  warning: "some warning Message",
-  error: " some error message",
+  warning: "Some warning Message",
+  error: "Some error message",
 };
 
 const messageData = new Array(90).fill(null).map((_, i) => {
