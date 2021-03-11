@@ -1,4 +1,4 @@
-import { LogsProps } from "../models/models";
+import { LogsProps } from '../models/models';
 
 interface StatsProps {
   warning: number;
@@ -6,8 +6,9 @@ interface StatsProps {
   error: number;
 }
 
-export const caluclateStatistics = (data: LogsProps[]): StatsProps => {
-  console.log(" CALLING FUNCTION");
+export const calculateStatistics = (
+  data: LogsProps[],
+): StatsProps => {
   return data.reduce((prev, next) => {
     prev[next.severity] = ++prev[next.severity] || 1;
     return prev;

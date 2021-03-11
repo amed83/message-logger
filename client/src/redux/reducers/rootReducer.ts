@@ -1,5 +1,5 @@
-import { combineReducers } from "@reduxjs/toolkit";
-import dataSlice from "./dataReducer";
+import { combineReducers } from '@reduxjs/toolkit';
+import dataSlice from './dataReducer';
 
 const rootReducer = combineReducers({
   data: dataSlice,

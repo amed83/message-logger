@@ -1,18 +1,18 @@
-import { Container } from "@material-ui/core";
-import { FC, memo } from "react";
-import { Containertyles } from "./styles";
-import { Typography } from "@material-ui/core";
-import Box from "@material-ui/core/Box";
-import { caluclateStatistics } from "../../utils/calculateStatistics";
-import { LogsProps } from "../../models/models";
+import { Container } from '@material-ui/core';
+import { FC, memo } from 'react';
+import { ContainerStyles } from './styles';
+import { Typography } from '@material-ui/core';
+import Box from '@material-ui/core/Box';
+import { calculateStatistics } from '../../utils/calculateStatistics';
+import { LogsProps } from '../../models/models';
 
 interface DataProps {
   data: LogsProps[];
 }
 
 export const Statistics: FC<DataProps> = memo(({ data }) => {
-  const { warning, info, error } = caluclateStatistics(data);
-  const classes = Containertyles();
+  const { warning, info, error } = calculateStatistics(data);
+  const classes = ContainerStyles();
   return (
     <Container className={classes.root}>
       <Typography component="div">

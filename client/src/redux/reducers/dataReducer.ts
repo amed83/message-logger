@@ -1,13 +1,13 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { LogsProps } from "../../models/models";
-import { fetchDataAction } from "../actions/fetchData";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { LogsProps } from '../../models/models';
+import { fetchDataAction } from '../actions/fetchData';
 
 export interface LogsState {
   logs: {
     data: LogsProps[];
     hasNextPage: boolean;
   };
-  fetchStatus: "pending" | "fulfilled" | "rejected" | "initial";
+  fetchStatus: 'pending' | 'fulfilled' | 'rejected' | 'initial';
 }
 
 const initialState: LogsState = {
@@ -15,7 +15,7 @@ const initialState: LogsState = {
     data: [],
     hasNextPage: false,
   },
-  fetchStatus: "initial",
+  fetchStatus: 'initial',
 };
 
 interface ResponsePayload {
@@ -24,23 +24,26 @@ interface ResponsePayload {
 }
 
 export const dataSlice = createSlice({
-  name: "data",
+  name: 'data',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchDataAction.pending, (state) => {
-      state.fetchStatus = "pending";
+      state.fetchStatus = 'pending';
     });
     builder.addCase(
       fetchDataAction.fulfilled,
       (state, action: PayloadAction<ResponsePayload>) => {
-        state.logs.data = [...state.logs.data, ...action.payload.logs];
+        state.logs.data = [
+          ...state.logs.data,
+          ...action.payload.logs,
+        ];
         state.logs.hasNextPage = action.payload.hasNextPage;
-        state.fetchStatus = "fulfilled";
-      }
+        state.fetchStatus = 'fulfilled';
+      },
     );
     builder.addCase(fetchDataAction.rejected, (state) => {
-      state.fetchStatus = "rejected";
+      state.fetchStatus = 'rejected';
     });
   },
 });

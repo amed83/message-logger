@@ -1,23 +1,24 @@
-import { FC, memo } from "react";
-import Container from "@material-ui/core/Container";
-import { Containertyles } from "./styles";
-import { LogsProps } from "../../models/models";
-
+import { FC, memo } from 'react';
+import { LogsProps } from '../../models/models';
+import { LogItemContainerStyles } from './styles';
+import ListItem from '@material-ui/core/ListItem';
+import List from '@material-ui/core/List';
 export const LogItem: FC<Partial<LogsProps>> = memo(
   ({ date, severity, message }) => {
-    const classes = Containertyles();
+    const classes = LogItemContainerStyles();
     return (
-      <Container className={classes.root}>
-        <p>
-          <strong>Date:</strong> {date}
-        </p>
-        <p>
-          <strong>Severity:</strong> {severity}
-        </p>
-        <p>
-          <strong>Message:</strong> {message}
-        </p>
-      </Container>
+      <List className={classes.root}>
+        <ListItem>
+          <strong>Date:</strong>&nbsp;{date}
+        </ListItem>
+        <ListItem>
+          <strong>Severity:</strong>&nbsp;
+          {severity.charAt(0).toUpperCase() + severity.slice(1)}
+        </ListItem>
+        <ListItem>
+          <strong>Message:</strong>&nbsp;{message}
+        </ListItem>
+      </List>
     );
-  }
+  },
 );

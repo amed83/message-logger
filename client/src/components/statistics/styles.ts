@@ -1,7 +1,7 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles';
 
-export const Containertyles = makeStyles({
+export const ContainerStyles = makeStyles({
   root: {
-    border: "solid black 1px",
+    border: 'solid black 1px',
   },
 });
