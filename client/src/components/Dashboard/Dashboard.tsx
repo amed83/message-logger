@@ -36,8 +36,11 @@ export const Dashboard = () => {
     }
   }, [fetchStatus, logs.hasNextPage]);
 
-  const handleLoadMore = () => {
+  useEffect(() => {
     dispatch(fetchDataAction(pageIndex));
+  }, [dispatch, pageIndex]);
+
+  const handleLoadMore = () => {
     setLoading(true);
     setPageIndex(pageIndex + 1);
   };
@@ -53,17 +56,20 @@ export const Dashboard = () => {
   }
   const gridClasses = ListGridStyle();
   const containerClasses = LoadingContainerStyle();
+
   return (
     <Container>
       <Grid container justify="center" className={gridClasses.root}>
-        <List
-          component="nav"
-          ref={infiniteRef as React.RefObject<HTMLUListElement>}
-        >
-          {logs.data.map((log, id) => {
-            return <LogItem key={id} {...log} />;
-          })}
-        </List>
+        {logs.data.length > 0 && (
+          <List
+            component="nav"
+            ref={infiniteRef as React.RefObject<HTMLUListElement>}
+          >
+            {logs.data.map((log, id) => {
+              return <LogItem key={id} {...log} />;
+            })}
+          </List>
+        )}
       </Grid>
       <Container className={containerClasses.root}>
         {noMoraDataMessage && (
