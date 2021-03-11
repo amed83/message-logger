@@ -16,6 +16,9 @@ export const Statistics: FC<DataProps> = memo(({ data }) => {
   return (
     <Container className={classes.root}>
       <Typography component="div">
+        <Box fontWeight="fontWeightBold" fontSize="h5.fontSize" m={1}>
+          Reports
+        </Box>
         <Box fontWeight="fontWeightBold" m={1}>
           Warnings: {warning}
         </Box>
