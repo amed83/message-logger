@@ -1,12 +1,7 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 import { useState } from 'react';
-import { fetchDataAction } from '../../redux/actions/fetchData';
-import {
-  getLogs,
-  getFetchStatus,
-} from '../../redux/selectors/logsSelectors';
 import { LogItem } from '../LogItem/LogItem';
 import { Statistics } from '../Statistics/Statistics';
 import './styles.ts';
@@ -14,39 +9,17 @@ import { Container } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
 import { ListGridStyle, LoadingContainerStyle } from './styles';
+import { useFetchData } from '../customHooks/useFetchData';
 
 export const Dashboard = () => {
-  const dispatch = useDispatch();
-  const logs = useSelector(getLogs);
-  const fetchStatus = useSelector(getFetchStatus);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [hasNextPage, setHasNextPage] = useState<boolean>(true);
   const [pageIndex, setPageIndex] = useState<number>(1);
-  const [noMoraDataMessage, setNoMoreDataMessage] = useState<boolean>(
-    false,
-  );
-
-  useEffect(() => {
-    if (fetchStatus === 'fulfilled') {
-      setLoading(false);
-    }
-    if (fetchStatus === 'fulfilled' && !logs.hasNextPage) {
-      setNoMoreDataMessage(true);
-      setHasNextPage(false);
-    }
-  }, [fetchStatus, logs.hasNextPage]);
-
-  useEffect(() => {
-    dispatch(fetchDataAction(pageIndex));
-  }, [dispatch, pageIndex]);
-
+  const { logs, fetchStatus } = useFetchData(pageIndex);
   const handleLoadMore = () => {
-    setLoading(true);
     setPageIndex(pageIndex + 1);
   };
   const infiniteRef = useInfiniteScroll({
-    loading,
-    hasNextPage,
+    loading: fetchStatus === 'initial' || fetchStatus === 'pending',
+    hasNextPage: logs.hasNextPage,
     onLoadMore: handleLoadMore,
     scrollContainer: 'parent',
   });
@@ -72,7 +45,7 @@ export const Dashboard = () => {
         )}
       </Grid>
       <Container className={containerClasses.root}>
-        {noMoraDataMessage && (
+        {!logs.hasNextPage && fetchStatus === 'fulfilled' && (
           <strong>THERE'S NO NEW DATA TO SHOW</strong>
         )}
       </Container>
